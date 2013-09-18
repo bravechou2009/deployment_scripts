@@ -19,11 +19,11 @@ def main(args):
         env.password = args[3]
     sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install build-essential -y')
-    sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev gettext \
-            libz-dev libssl-dev python-pip git build-essential vim \
-            exuberant-ctags -y')
     run('gcc -v')
     run('make -v')
+    sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev gettext \
+         libz-dev libssl-dev python-pip git build-essential vim \
+         exuberant-ctags git -y')
 
 
 
