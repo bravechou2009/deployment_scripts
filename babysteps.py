@@ -5,18 +5,15 @@ from fabric.contrib.console import confirm
 from fabric.api import (local, run, sudo, put, get, prompt, reboot, abort,
      settings, env)
 from fabric.contrib.console import confirm
+from getpass import getpass
+import cmd
 import sys
+import fab_prompt
 
-
-def main(args):
+def main():
     """This function installs various useful linux utilities on a fresh install
     of Debian."""
-    if len(args) < 4 or len(args) > 4:
-        sys.exit("Please provide username, hostname, and password for remote.")
-    else:
-        env.user = args[1]
-        env.host_string = args[2]
-        env.password = args[3]
+
     sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install build-essential -y')
     run('gcc -v')
@@ -24,7 +21,7 @@ def main(args):
     sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev gettext \
          libz-dev libssl-dev python-pip git build-essential vim \
          exuberant-ctags git -y')
-
+    sys.exit()
 
 
 
@@ -35,4 +32,8 @@ def main(args):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+  #  env.user = raw_input('Username: ')
+ #   env.host_string = raw_input('Hostname: ')
+#    env.password = getpass()
+   fab_prompt.prompt()
+   main()
