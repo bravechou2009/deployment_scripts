@@ -26,6 +26,7 @@ def main():
         check_file.close()
         if write_bashrc:
             run("echo 'source /usr/local/bin/virtualenvwrapper.sh' >> ~/.bashrc")
+        local('rm /tmp/.bashrc')
     except:
         raise
     sys.exit()
