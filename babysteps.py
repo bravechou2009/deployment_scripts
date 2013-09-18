@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
+from __future__ import with_statement
+from fabric.contrib.console import confirm
 from fabric.api import (local, run, sudo, put, get, prompt, reboot, abort,
      settings, env)
-#from __future__ import with_statement
 from fabric.contrib.console import confirm
 import sys
 
@@ -19,7 +20,8 @@ def main(args):
     sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install build-essential -y')
     sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev gettext \
-            libz-dev libssl-dev python-pip git build-essential vim -y')
+            libz-dev libssl-dev python-pip git build-essential vim \
+            exuberant-ctags -y')
     run('gcc -v')
     run('make -v')
 
