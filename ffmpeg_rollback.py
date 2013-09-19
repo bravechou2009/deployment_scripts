@@ -9,7 +9,6 @@ from getpass import getpass
 import cmd
 import sys
 import fab_prompt
-import ffmpeg_update
 
 def main():
     """This function installs various useful linux utilities on a fresh install
@@ -132,4 +131,3 @@ def main():
 if __name__ == '__main__':
    fab_prompt.prompt()
    main()
-   ffmpeg_update.main()
