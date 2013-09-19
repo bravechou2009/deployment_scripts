@@ -18,12 +18,9 @@ def main():
     sudo('apt-get -y install build-essential')
     run('gcc -v')
     run('make -v')
-    sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev \
+    sudo('apt-get -y install python-dev libcurl4-gnutls-dev libexpat1-dev \
          gettext libz-dev libssl-dev python-pip git build-essential vim \
-         exuberant-ctags autoconf automake git \
-         libass-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool \
-         libva-dev libvdpau-dev libvorbis-dev libx11-dev libxext-dev \
-         libxfixes-dev pkg-config texi2html zlib1g-dev -y')
+         exuberant-ctags autoconf automake git')
     sys.exit()
 
 
