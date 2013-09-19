@@ -15,12 +15,12 @@ def main():
     of Debian."""
 
     sudo('apt-get update -y && apt-get upgrade -y')
-    sudo('apt-get install build-essential -y')
+    sudo('apt-get -y install build-essential')
     run('gcc -v')
     run('make -v')
-    sudo('apt-get install python-dev libcurl4-gnutls-dev libexpat1-dev gettext \
-         libz-dev libssl-dev python-pip git build-essential vim \
-         exuberant-ctags git -y')
+    sudo('apt-get -y install python-dev libcurl4-gnutls-dev libexpat1-dev \
+         gettext libz-dev libssl-dev python-pip git build-essential vim \
+         exuberant-ctags autoconf automake git')
     sys.exit()
 
 
