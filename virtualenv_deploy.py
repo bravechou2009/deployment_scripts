@@ -28,7 +28,6 @@ def main():
         local('rm /tmp/.bashrc')
     except:
         raise
-    sys.exit()
 
 
 
@@ -36,3 +35,4 @@ def main():
 if __name__ == '__main__':
    fab_prompt.prompt()
    main()
+   sys.exit()
