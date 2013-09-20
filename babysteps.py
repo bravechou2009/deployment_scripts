@@ -32,8 +32,5 @@ def main():
 
 
 if __name__ == '__main__':
-  #  env.user = raw_input('Username: ')
- #   env.host_string = raw_input('Hostname: ')
-#    env.password = getpass()
    fab_prompt.prompt()
    main()
