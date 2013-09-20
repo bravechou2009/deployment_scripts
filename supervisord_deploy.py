@@ -8,7 +8,7 @@ import sys
 import fab_prompt
 
 def main():
-    """Deploy and configure virtualenv and its wrapper."""
+    """Deploy and (default) configure supervisord."""
 
     sudo('pip install supervisor')
     run("echo_supervisord_conf")

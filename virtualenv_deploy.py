@@ -12,8 +12,7 @@ def main():
     """Deploy and configure virtualenv and its wrapper."""
 
     sudo('pip install virtualenv virtualenvwrapper')
-    run('export WORKON_HOME=~/envs')
-    run('mkdir -p ~/envs')
+    run('export WORKON_HOME=~/.virtualenvs')
     try:
         write_bashrc = True
         get('~/.bashrc','/tmp/.bashrc')
