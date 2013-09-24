@@ -35,7 +35,7 @@ def main():
     sudo('echo "pythonpath = .." >> {0}'.format(uwsgi_ini_file))
     sudo('echo "env = DJANGO_SETTINGS_MODULE={1}.settings" >> {0}'.format(uwsgi_ini_file, django_project_name))
     sudo('echo "module = {1}.wsgi" >> {0}'.format(uwsgi_ini_file, django_project_name))
-    sudo('echo "stats = 127.0.0.1:9191" >> {0}'.format(uwsgi_ini_file))
+    sudo('echo "#stats = 127.0.0.1:9191" >> {0}'.format(uwsgi_ini_file))
     sudo('echo "wsgi-file = /home/{1}/.virtualenvs/{2}-env/{2}/{2}/uwsgi.py" >> {0}'.format(uwsgi_ini_file, env.user, django_project_name))
     sudo('echo "virtualenv = /home/{1}/.virtualenvs/{2}-env" >> {0}'.format(uwsgi_ini_file, env.user, django_project_name))
 
