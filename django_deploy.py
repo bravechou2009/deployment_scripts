@@ -33,10 +33,13 @@ def uwsgi_setup(django_project_name, django_project_dir):
 def nginx_setup(django_project_name):
     """set up nginx.conf to deal with uwsgi"""
     nginx_conf_loc = '/usr/local/nginx/conf/nginx.conf'
+    sudo('touch /usr/local/nginx/conf/nginx.conf')
     sudo('rm {0}'.format(nginx_conf_loc))
-    sudo('touch {0}'.format(nginx_conf_loc))
-    for i, line in enumerate(open(os.path.join(os.getcwd(),'template.nginx.conf'),'r')):
-        sudo('echo "{0}" >> {1}'.format(line.format(env.user, django_project_name)[:-1], nginx_conf_loc))
+    put(os.path.join(os.getcwd(), 'config', 'nginx.conf'), '/usr/local/nginx/conf/nginx.conf', use_sudo=True)
+    sudo('sed -e "s/\*\*USERNAME\*\*/{0}/g" -e "s/\*\*PROJECTNAME\*\*/{1}/g"  -i "/usr/local/nginx/conf/nginx.conf"'.format(env.user, django_project_name))
+    #sudo('touch {0}'.format(nginx_conf_loc))
+    #for i, line in enumerate(open(os.path.join(os.getcwd(),'config', 'template.nginx.conf'),'r')):
+    #    sudo('echo "{0}" >> {1}'.format(line.format(env.user, django_project_name)[:-1], nginx_conf_loc))
 
 
 def main():
