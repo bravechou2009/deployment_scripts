@@ -10,24 +10,16 @@ import virtualenv_deploy
 import os
 
 
+current_absdir = os.path.split(os.path.abspath(__file__))[0]
+
 def uwsgi_setup(django_project_name, django_project_dir):
     """set uwsgi up to serve django"""
     sudo('pip install uwsgi')
     uwsgi_ini_file = '/etc/uwsgi/vassals/{0}.ini'.format(django_project_name)
     sudo('mkdir -p /etc/uwsgi/vassals')
-    sudo('echo "[uwsgi]" > {0}'.format(uwsgi_ini_file))
-    sudo('echo "master = True" >> {0}'.format(uwsgi_ini_file))
-    sudo('echo "threads = 2" >> {0}'.format(uwsgi_ini_file))
-    sudo('echo "home = {1}" >> {0}'.format(uwsgi_ini_file, django_project_dir))
-    sudo('echo "chdir = {1}" >> {0}'.format(uwsgi_ini_file, django_project_dir))
-    sudo('echo "socket = /tmp/{1}.sock" >> {0}'.format(uwsgi_ini_file, django_project_name))
-    sudo('echo "chmod-socket = 646" >> {0}'.format(uwsgi_ini_file))
-    sudo('echo "pythonpath = .." >> {0}'.format(uwsgi_ini_file))
-    sudo('echo "env = DJANGO_SETTINGS_MODULE={1}.settings" >> {0}'.format(uwsgi_ini_file, django_project_name))
-    sudo('echo "module = {1}.wsgi" >> {0}'.format(uwsgi_ini_file, django_project_name))
-    sudo('echo "#stats = 127.0.0.1:9191" >> {0}'.format(uwsgi_ini_file))
-    sudo('echo "wsgi-file = /home/{1}/.virtualenvs/{2}-env/{2}/{2}/uwsgi.py" >> {0}'.format(uwsgi_ini_file, env.user, django_project_name))
-    sudo('echo "virtualenv = /home/{1}/.virtualenvs/{2}-env" >> {0}'.format(uwsgi_ini_file, env.user, django_project_name))
+    put(os.path.join(current_absdir, 'config', 'uwsgi.ini'), os.path.join('/etc/uwsgi/vassals',
+                '{0}.ini'.format(django_project_name)), use_sudo=True)
+    sudo('sed -e "s/\*\*USERNAME\*\*/{0}/g" -e "s/\*\*PROJECTNAME\*\*/{1}/g"  -i "/etc/uwsgi/vassals/{1}.ini"'.format(env.user, django_project_name))
 
 
 def nginx_setup(django_project_name):
@@ -35,11 +27,8 @@ def nginx_setup(django_project_name):
     nginx_conf_loc = '/usr/local/nginx/conf/nginx.conf'
     sudo('touch /usr/local/nginx/conf/nginx.conf')
     sudo('rm {0}'.format(nginx_conf_loc))
-    put(os.path.join(os.getcwd(), 'config', 'nginx.conf'), '/usr/local/nginx/conf/nginx.conf', use_sudo=True)
+    put(os.path.join(current_absdir, 'config', 'nginx.conf'), '/usr/local/nginx/conf/nginx.conf', use_sudo=True)
     sudo('sed -e "s/\*\*USERNAME\*\*/{0}/g" -e "s/\*\*PROJECTNAME\*\*/{1}/g"  -i "/usr/local/nginx/conf/nginx.conf"'.format(env.user, django_project_name))
-    #sudo('touch {0}'.format(nginx_conf_loc))
-    #for i, line in enumerate(open(os.path.join(os.getcwd(),'config', 'template.nginx.conf'),'r')):
-    #    sudo('echo "{0}" >> {1}'.format(line.format(env.user, django_project_name)[:-1], nginx_conf_loc))
 
 
 def main():
