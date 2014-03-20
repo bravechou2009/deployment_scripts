@@ -20,7 +20,7 @@ def main():
     run('make -v')
     sudo('apt-get -y install python-dev libcurl4-gnutls-dev libexpat1-dev \
          gettext libz-dev libssl-dev python-pip git build-essential vim \
-         exuberant-ctags autoconf automake git')
+         exuberant-ctags autoconf automake git smartmontools gsmartcontrol')
     sys.exit()
 
 

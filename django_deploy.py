@@ -29,7 +29,7 @@ def nginx_setup(django_project_name):
     sudo('rm {0}'.format(nginx_conf_loc))
     put(os.path.join(current_absdir, 'config', 'nginx.conf'), '/usr/local/nginx/conf/nginx.conf', use_sudo=True)
     sudo('sed -e "s/\*\*USERNAME\*\*/{0}/g" -e "s/\*\*PROJECTNAME\*\*/{1}/g"  -i "/usr/local/nginx/conf/nginx.conf"'.format(env.user, django_project_name))
-
+    sudo('/usr/local/sbin/nginx -s reload')
 
 def main():
     """Deploy Django inside a virtual environment."""
@@ -44,7 +44,7 @@ def main():
     with cd(django_project_dir):
         sudo('chmod +x manage.py')
     uwsgi_setup(django_project_name, django_project_dir)
-    nginx_setup(django_project_name)
+    #nginx_setup(django_project_name)
 
 
 if __name__ == '__main__':

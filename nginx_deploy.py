@@ -18,7 +18,7 @@ def main():
     # dependencies:
     sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install -y libc6 libexpat1 libgd2-xpm libgeoip1 libpam0g \
-         libpcre3 libssl1.0.0 libxml2 libxslt1.1 zlib1g')
+         libpcre3 libssl1.0.0 libxml2 libxslt1.1 zlib1g libpcre3-dev')
     run('mkdir -p ~/nginx_sources')
 
     # rtmp module.

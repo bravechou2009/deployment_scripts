@@ -30,7 +30,7 @@ def main():
         run('wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz')
         run('tar xzvf yasm-1.2.0.tar.gz')
     with cd('~/ffmpeg_sources/yasm-1.2.0/'):
-        run('./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin"')
+        run('./configure --prefix="$HOME/ffmpeg_build" --disable-asm --bindir="$HOME/bin"')
         run('make')
         run('make install')
         run('make distclean')
